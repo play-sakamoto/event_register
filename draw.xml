@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mxfile host="app.diagrams.net" version="20.1.0">
+  <diagram id="f8197c8b" name="SiteFlow">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="d64b5f2d" value="ホーム" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="100" y="50" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="5931f13c" value="アカウント" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="100" y="200" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="c40cb15d" value="ダッシュボード" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="300" y="200" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="d67424b1" value="イベント管理" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="500" y="200" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="46055d5e" value="会計(POS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="700" y="200" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="42e51342" value="商品管理" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="100" y="400" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="6b3ed6b1" value="在庫管理" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="300" y="400" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="e87ed7e3" value="販売ログ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="500" y="400" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="bfc01cb2" value="チーム管理" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="700" y="400" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="3b85350d" value="法務関連" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="900" y="400" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ホーム → 各メインページ -->
+        <mxCell id="50f44f9d" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="5931f13c"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="71e7049f" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="c40cb15d"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="d4522186" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="d67424b1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="21a2b6a2" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="46055d5e"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f2aabe1b" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="42e51342"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="6605323e" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="6b3ed6b1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="8e3c3bd7" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="e87ed7e3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="df509d52" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="bfc01cb2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="2b71e19f" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="d64b5f2d" target="3b85350d"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- アカウント下層 -->
+        <mxCell id="cc7baec7" value="新規登録" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="60" y="300" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="04c8de32" value="ログイン" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="200" y="300" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="8a739dca" value="パスワード再設定" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="340" y="300" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="4b1cbdce" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="5931f13c" target="cc7baec7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="264484ac" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="5931f13c" target="04c8de32"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="eae4bfdf" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="5931f13c" target="8a739dca"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ダッシュボード下層 -->
+        <mxCell id="72ef6549" value="売上サマリー" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="260" y="300" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="f9024f4a" value="時間帯別売上" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="400" y="300" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="d4696bf2" value="TOP商品" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="540" y="300" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="f73c4574" value="低在庫アラート" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="680" y="300" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="35ee4d3d" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="c40cb15d" target="72ef6549"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="adeada83" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="c40cb15d" target="f9024f4a"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ae9a68c6" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="c40cb15d" target="d4696bf2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="d5d27b7f" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="c40cb15d" target="f73c4574"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- 以下、他の下層ページも同様に定義（省略せずフルで出力しています） -->
+        <!-- …  products / inventory / sales / team / legal の下層ノードとエッジ … -->
+
+        <!-- 商品管理下層 -->
+        <mxCell id="ab22214e" value="商品一覧" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="60" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="5f804f40" value="商品追加/編集" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="200" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="42a59db0" value="画像アップロード" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="340" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="605bfe91" value="CSV入出力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="480" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="6df3f0d3" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="42e51342" target="ab22214e"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="7502d5a0" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="42e51342" target="5f804f40"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="dc67a149" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="42e51342" target="42a59db0"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="1c37e594" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="42e51342" target="605bfe91"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- 在庫管理下層 -->
+        <mxCell id="15cf7791" value="在庫一覧" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="260" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="d8575228" value="在庫調整" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="400" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="6b35adab" value="売り切れ設定" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="540" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="c19c4630" value="アラート閾値" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="680" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="ed19ea15" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="6b3ed6b1" target="15cf7791"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="b51d2091" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="6b3ed6b1" target="d8575228"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="8f35cb93" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="6b3ed6b1" target="6b35adab"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="f9fda3ab" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="6b3ed6b1" target="c19c4630"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- 販売ログ下層 -->
+        <mxCell id="e7d2d010" value="会計履歴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="460" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="12c818f9" value="日別集計" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="600" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="a89a410e" value="詳細検索" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="740" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="9a8b1a43" value="レポート" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="880" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="c9af19bb" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="e87ed7e3" target="e7d2d010"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="1d4ee084" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="e87ed7e3" target="12c818f9"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="58718052" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="e87ed7e3" target="a89a410e"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="153fbbf8" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="e87ed7e3" target="9a8b1a43"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- チーム管理下層 -->
+        <mxCell id="d6b0b690" value="メンバー一覧" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="660" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="60f6b1b3" value="役割設定" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="800" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="4e76dc7a" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="bfc01cb2" target="d6b0b690"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="605bfe91" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="bfc01cb2" target="60f6b1b3"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- 法務関連下層 -->
+        <mxCell id="9db38d7b" value="利用規約" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="860" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="efd766a1" value="プライバシーポリシー" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="1000" y="500" width="120" height="50" as="geometry"/></mxCell>
+        <mxCell id="281ed48e" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="3b85350d" target="9db38d7b"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="cbea0c3f" style="endArrow=block;html=1;strokeWidth=1;" edge="1" parent="1" source="3b85350d" target="efd766a1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
