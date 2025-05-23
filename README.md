@@ -91,6 +91,7 @@ POSレジを導入するには少し重い、短期間のイベント事に導�
 - 日報データエクスポート（PDF） 
   - レポートをメールで送信するボタンを追加
 - データのメール送信機能 
+- 
 
 ---
 
@@ -210,8 +211,12 @@ POSレジを導入するには少し重い、短期間のイベント事に導�
 - **問い合わせ**
 
 
-#　 画面遷移図
+# 画面遷移図
 https://www.figma.com/board/pU5HUkmnktmMabQC9c12Eb/Event%E3%83%AC%E3%82%B8?node-id=0-1&t=2fwiZLm8uyC3iyLE-1
 
 # 画面設計デモ
 https://v0.dev/chat/pos-system-design-omoaZLrkM6Y
+
+
+# ER図
+https://dbdiagram.io/d/event%E3%83%AC%E3%82%B8-682fe17cb9f7446da3c8fcde
