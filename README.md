@@ -220,3 +220,18 @@ https://v0.dev/chat/pos-system-design-omoaZLrkM6Y
 
 # ER図
 https://dbdiagram.io/d/event%E3%83%AC%E3%82%B8-682fe17cb9f7446da3c8fcde
+
+
+
+■ 開発環境: Docker
+■ サーバサイド: Ruby on Rails 7系
+　　Ruby 3.2.2 Rails 7.0.4.3
+■ フロントエンド: React
+■ CSSフレームワーク: bootstrap5系
+■ インフラ:
+・ Webアプリケーションサーバ: Fly.io
+・ セッションサーバ: Redis
+・ データベースサーバ: Postgres
+■ その他：
+・ VCS: GitHub
+・ CI/CD: GitHubActions
