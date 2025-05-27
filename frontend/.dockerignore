@@ -1,0 +1,4 @@
+node_modules
+# Yarn Berry では cache をコミットするので除外しない
+# .yarn/cache はサイズが数百 MB 超える場合のみ判断
+dist
