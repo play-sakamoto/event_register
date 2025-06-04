@@ -1,0 +1,36 @@
+{
+  "name": "app",
+  "private": true,
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.4.0",
+    "esbuild": "^0.25.2",
+    "prettier": "3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "vite": "^5.0.0",
+    "vite-plugin-ruby": "^5.1.0"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
+    "build:css": "npx @tailwindcss/cli -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
+    "format": "prettier --write \"app/javascript/src/**/*.{js,jsx,ts,tsx,json,css}\"",
+    "format:check": "prettier --check \"app/javascript/src/**/*.{js,jsx,ts,tsx,json,css}\""
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.13",
+    "@tailwindcss/cli": "^4.1.4",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "axios": "^1.9.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.511.0",
+    "radix-ui": "^1.4.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "7",
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      memory: 思い出
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+      memory:
+        title: タイトル
+        body: 本文
+        public_flag: 公開フラグ
+        image: 画像
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      blank: "を入力してください"
+      invalid: "は無効です"
+      too_short: "%{count}文字以上で入力してください"
