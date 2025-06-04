@@ -9,10 +9,13 @@ import ProductManagement from "./product-management"
 import SalesLog from "./sales-log"
 import EmptyPage from "../../../components/empty-page"
 import Dashboard from "./dashboard"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom" // Added useParams
 
 
-export default function EventDetailPage({ params }: { params: { id: string } }) {
+export default function EventDetailPage() { // Removed params prop
+  const { id } = useParams<{ id: string }>() // Use useParams to get id
+  const eventId = id! // Assert id is not undefined, or handle case if it could be
+
   const [activeTab, setActiveTab] = useState("pos")
 
   return (
@@ -68,11 +71,11 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                   </Button>
                 </Link>
               </div>
-              <Dashboard eventId={params.id} />
+              <Dashboard eventId={eventId} />
             </TabsContent>
 
             <TabsContent value="pos" className="mt-0">
-              <POSScreen eventId={params.id} />
+              <POSScreen eventId={eventId} />
             </TabsContent>
 
             <TabsContent value="products" className="mt-0">
@@ -84,7 +87,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                   </Button>
                 </Link>
               </div>
-              <ProductManagement eventId={params.id} />
+              <ProductManagement eventId={eventId} />
             </TabsContent>
 
             <TabsContent value="inventory" className="mt-0">
@@ -108,7 +111,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                   </Button>
                 </Link>
               </div>
-              <SalesLog eventId={params.id} />
+              <SalesLog eventId={eventId} />
             </TabsContent>
 
             <TabsContent value="members" className="mt-0">

@@ -13,9 +13,10 @@ import MemoryCreatePage from "../src/pages/memory_lists/new";
 import MemoryShowPage from "../src/pages/memory_lists/show";
 import MemoryEditPage from "../src/pages/memory_lists/edit";
 import ProfilePage from "../src/pages/profile/show";
-import EventsPage from "../src/pages/event/index"
-import EventDetailPage from "../src/pages/event/show/show";
+import EventsPage from "../src/pages/event/index";
 import NewEventPage from "../src/pages/event/new/new";
+import EventDetailPage from "../src/pages/event/show/show";
+import EditEventPage from "../src/pages/event/edit/EditEventPage"; // Added import
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -38,8 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/events/new" element={<NewEventPage />} />
-              <Route path="/events/:id" element={<EventDetailPage params={{id: ""}} />} />
-
+              {/*
+                The EventDetailPage route seems to have a slight issue with how params are passed.
+                Normally, React Router handles params internally. The component itself (EventDetailPage)
+                would use `useParams` hook to get the `id`.
+                For example: `const { id } = useParams();` inside EventDetailPage.
+                The route definition would just be: <Route path="/events/:id" element={<EventDetailPage />} />
+                I will correct this for both EventDetailPage and EditEventPage.
+              */}
+              <Route path="/events/:id" element={<EventDetailPage />} />
+              <Route path="/events/:id/edit" element={<EditEventPage />} />
             </Route>
           </Routes>
         </Router>

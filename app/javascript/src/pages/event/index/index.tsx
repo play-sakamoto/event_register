@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button } from "../../../components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card"
 import {
@@ -9,66 +9,49 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../../components/ui/dropdown-menu"
-import { Badge } from "../../../components/ui/badge"
-import { CalendarDays, MoreVertical, Plus, Store, Trash2, Edit, Eye } from "lucide-react"
+// import { Badge } from "../../../components/ui/badge" // Badge not used in the current version after removing status
+import { CalendarDays, MoreVertical, Plus, Store, Trash2, Edit, Eye, Loader2 } from "lucide-react"
 import { Link } from "react-router-dom"
+import { getEvents, deleteEvent } from "../../../services/events"
+import { Event } from "../../../types/event"
 
-
-// Mock data - in real app this would come from API
-const mockEvents = [
-  {
-    id: 1,
-    name: "夏祭り2024",
-    date: "2024-08-15",
-    itemCount: 12,
-    totalSales: 45000,
-  },
-  {
-    id: 2,
-    name: "学園祭フードコート",
-    date: "2024-11-03",
-    itemCount: 8,
-    totalSales: 0,
-  },
-  {
-    id: 3,
-    name: "地域フリーマーケット",
-    date: "2024-07-20",
-    itemCount: 15,
-    totalSales: 32000,
-  },
-  {
-    id: 4,
-    name: "秋の収穫祭",
-    date: "2024-10-15",
-    itemCount: 6,
-    totalSales: 0,
-  },
-]
 
 export default function EventsPage() {
-  const [events, setEvents] = useState(mockEvents)
+  const [events, setEvents] = useState<Event[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleDeleteEvent = (eventId: number) => {
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true)
+        const data = await getEvents()
+        setEvents(data)
+        setError(null)
+      } catch (err) {
+        setError("イベントの読み込みに失敗しました。")
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchEvents()
+  }, [])
+
+  const handleDeleteEvent = async (eventId: number) => {
     if (confirm("このイベントを削除しますか？")) {
-      setEvents(events.filter((event) => event.id !== eventId))
+      try {
+        await deleteEvent(eventId)
+        setEvents(events.filter((event) => event.id !== eventId))
+      } catch (err) {
+        setError("イベントの削除に失敗しました。")
+        console.error(err)
+        // Optionally, show a toast notification for the error
+      }
     }
   }
 
-  // const getStatusBadge = (status: string) => {
-  //   switch (status) {
-  //     case "active":
-  //       return <Badge className="bg-green-100 text-green-800">開催中</Badge>
-  //     case "upcoming":
-  //       return <Badge className="bg-blue-100 text-blue-800">予定</Badge>
-  //     case "completed":
-  //       return <Badge className="bg-gray-100 text-gray-800">終了</Badge>
-  //     default:
-  //       return <Badge variant="secondary">{status}</Badge>
-  //   }
-  // }
-
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString: string | Date) => {
     const date = new Date(dateString)
     return date.toLocaleDateString("ja-JP", {
       year: "numeric",
@@ -77,16 +60,39 @@ export default function EventsPage() {
     })
   }
 
-  const formatCurrency = (amount: number) => {
+  const formatCurrency = (amount: number | undefined) => {
+    if (typeof amount !== 'number') {
+      return 'N/A'; // Or some other placeholder for undefined sales
+    }
     return new Intl.NumberFormat("ja-JP", {
       style: "currency",
       currency: "JPY",
     }).format(amount)
   }
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+        <p className="ml-4 text-lg text-gray-700">イベントを読み込み中...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h2 className="text-2xl font-semibold text-red-600 mb-4">エラー</h2>
+        <p className="text-red-500">{error}</p>
+        <Button onClick={() => window.location.reload()} className="mt-4">
+          再読み込み
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
-
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
@@ -127,10 +133,10 @@ export default function EventsPage() {
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <CardTitle className="text-lg mb-1">{event.name}</CardTitle>
+                        <CardTitle className="text-lg mb-1">{event.title}</CardTitle>
                         <div className="flex items-center text-sm text-gray-600 mb-2">
                           <CalendarDays className="h-4 w-4 mr-1" />
-                          {formatDate(event.date)}
+                          {formatDate(event.start_time)}
                         </div>
                       </div>
                       <DropdownMenu>
@@ -140,14 +146,14 @@ export default function EventsPage() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuItem>
-                            <Link to={`/events/${event.id}`} className="flex items-center">
+                          <DropdownMenuItem asChild>
+                            <Link to={`/events/${event.id}`} className="flex items-center w-full">
                               <Eye className="h-4 w-4 mr-2" />
                               詳細を見る
                             </Link>
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <Link to={`/events/${event.id}/edit`} className="flex items-center">
+                          <DropdownMenuItem asChild>
+                            <Link to={`/events/${event.id}/edit`} className="flex items-center w-full">
                               <Edit className="h-4 w-4 mr-2" />
                               編集
                             </Link>
@@ -164,7 +170,8 @@ export default function EventsPage() {
                     <div className="space-y-3">
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">登録商品数</span>
-                        <span className="font-medium">{event.itemCount}個</span>
+                        {/* Assuming itemCount is optional and might not be present */}
+                        <span className="font-medium">{event.itemCount !== undefined ? `${event.itemCount}個` : 'N/A'}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">売上合計</span>
@@ -172,6 +179,7 @@ export default function EventsPage() {
                       </div>
                       <div className="pt-3 border-t">
                         <div className="flex space-x-2">
+                           {/* Link to View Details page */}
                           <Link to={`/events/${event.id}`} className="flex-1">
                             <Button variant="outline" size="sm" className="w-full">
                               詳細

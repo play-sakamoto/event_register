@@ -1,21 +1,17 @@
 "use client"
 
+import React, { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card"
 import { Badge } from "../../../components/ui/badge"
 import { Progress } from "../../../components/ui/progress"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../components/ui/table"
-import { CalendarDays, TrendingUp, ShoppingCart, Package, Clock, Star, AlertTriangle } from "lucide-react"
+import { CalendarDays, TrendingUp, ShoppingCart, Package, Clock, Star, AlertTriangle, Loader2, AlertCircle } from "lucide-react"
+import { getEvent } from "../../../services/events"
+import { Event } from "../../../types/event"
+import { Alert, AlertDescription, AlertTitle } from "../../../components/ui/alert"
 
-// Mock data
-const eventInfo = {
-  name: "夏祭り2024",
-  date: "2024-08-15",
-  status: "active",
-  startTime: "10:00",
-  endTime: "20:00",
-  location: "中央公園",
-}
 
+// Mock data (will be kept for sections not related to event details)
 const salesSummary = {
   totalSales: 125000,
   totalTransactions: 89,
@@ -50,6 +46,32 @@ const stockAlerts = [
 ]
 
 export default function Dashboard({ eventId }: { eventId: string }) {
+  const [event, setEvent] = useState<Event | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      if (!eventId) return
+      setLoading(true)
+      try {
+        const numericEventId = parseInt(eventId, 10)
+        if (isNaN(numericEventId)) {
+          throw new Error("Invalid event ID format.")
+        }
+        const data = await getEvent(numericEventId)
+        setEvent(data)
+        setError(null)
+      } catch (err: any) {
+        console.error("Failed to fetch event:", err)
+        setError(err.message || "イベント情報の読み込みに失敗しました。")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchEvent()
+  }, [eventId])
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("ja-JP", {
       style: "currency",
@@ -57,22 +79,24 @@ export default function Dashboard({ eventId }: { eventId: string }) {
     }).format(amount)
   }
 
-  const formatTime = (timeString: string) => {
-    return timeString
+  const formatDateTime = (dateTimeString: string | Date | undefined): string => {
+    if (!dateTimeString) return "N/A"
+    const date = new Date(dateTimeString)
+    return `${date.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })} ${date.toLocaleTimeString("ja-JP", { hour: '2-digit', minute: '2-digit' })}`;
   }
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "active":
-        return <Badge className="bg-green-100 text-green-800">開催中</Badge>
-      case "upcoming":
-        return <Badge className="bg-blue-100 text-blue-800">予定</Badge>
-      case "completed":
-        return <Badge className="bg-gray-100 text-gray-800">終了</Badge>
-      default:
-        return <Badge variant="secondary">{status}</Badge>
-    }
+  // Simplified status determination - can be expanded
+  const getEventStatus = (startTime: string | Date | undefined, endTime: string | Date | undefined): { text: string; badge: JSX.Element } => {
+    if (!startTime || !endTime) return { text: "不明", badge: <Badge variant="secondary">不明</Badge> };
+    const now = new Date();
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+
+    if (now < start) return { text: "予定", badge: <Badge className="bg-blue-100 text-blue-800">予定</Badge> };
+    if (now > end) return { text: "終了", badge: <Badge className="bg-gray-100 text-gray-800">終了</Badge> };
+    return { text: "開催中", badge: <Badge className="bg-green-100 text-green-800">開催中</Badge> };
   }
+
 
   const getStockStatus = (status: string) => {
     switch (status) {

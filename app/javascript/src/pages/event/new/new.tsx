@@ -8,30 +8,53 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../..
 import { Input } from "../../../components/ui/input"
 import { Label } from "../../../components/ui/label"
 import { Textarea } from "../../../components/ui/textarea"
-import { ArrowLeft, CalendarDays } from "lucide-react"
-import Header from "../../../components/header"
+import { Alert, AlertDescription, AlertTitle } from "../../../components/ui/alert" // Added Alert
+import { ArrowLeft, CalendarDays, AlertCircle } from "lucide-react"
+// import Header from "../../../components/header" // Header not used in this file
+import { createEvent, EventCreationData } from "../../../services/events" // Updated import
+import { Event } from "../../../types/event" // Added import
+
+// Helper to format date to YYYY-MM-DDTHH:MM required by datetime-local
+const formatDateForInput = (date: Date): string => {
+  const pad = (num: number) => num.toString().padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+};
+
 
 export default function NewEventPage() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({
-    name: "",
-    date: "",
+  const [formData, setFormData] = useState<EventCreationData>({
+    title: "",
     description: "",
+    start_time: formatDateForInput(new Date()), // Default to now
+    end_time: formatDateForInput(new Date(Date.now() + 60 * 60 * 1000)), // Default to 1 hour from now
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // Basic validation
+    if (new Date(formData.end_time) <= new Date(formData.start_time)) {
+      setError("終了日時は開始日時より後に設定してください。")
+      setIsSubmitting(false)
+      return
+    }
 
-    // In real app, this would make an API call to create the event
-    console.log("Creating event:", formData)
-
-    setIsSubmitting(false)
-    navigate("/events")
+    try {
+      const createdEvent = await createEvent(formData)
+      console.log("Event created:", createdEvent)
+      // Navigate to the detail page of the newly created event
+      navigate(`/events/${createdEvent.id}`)
+    } catch (err: any) {
+      console.error("Failed to create event:", err)
+      setError(err.message || "イベントの作成に失敗しました。")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -43,7 +66,6 @@ export default function NewEventPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
           {/* Back Button */}
@@ -62,6 +84,15 @@ export default function NewEventPage() {
             <p className="text-gray-600">イベントの基本情報を入力してください</p>
           </div>
 
+          {/* Error Alert */}
+          {error && (
+            <Alert variant="destructive" className="mb-6">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>エラー</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
           {/* Form */}
           <Card>
             <CardHeader>
@@ -69,26 +100,46 @@ export default function NewEventPage() {
                 <CalendarDays className="mr-2 h-5 w-5" />
                 イベント情報
               </CardTitle>
-              <CardDescription>イベント名と開催日は必須項目です</CardDescription>
+              <CardDescription>イベント名、開始日時、終了日時は必須項目です</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name">イベント名 *</Label>
+                  <Label htmlFor="title">イベント名 *</Label>
                   <Input
-                    id="name"
-                    name="name"
+                    id="title"
+                    name="title"
                     type="text"
                     placeholder="例: 夏祭り2024"
-                    value={formData.name}
+                    value={formData.title}
                     onChange={handleChange}
                     required
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="date">開催日 *</Label>
-                  <Input id="date" name="date" type="date" value={formData.date} onChange={handleChange} required />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="start_time">開始日時 *</Label>
+                    <Input
+                      id="start_time"
+                      name="start_time"
+                      type="datetime-local"
+                      value={formData.start_time.toString()}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="end_time">終了日時 *</Label>
+                    <Input
+                      id="end_time"
+                      name="end_time"
+                      type="datetime-local"
+                      value={formData.end_time.toString()}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -104,12 +155,16 @@ export default function NewEventPage() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-6">
-                  <Link to="/events" className="flex-1">
+                  <Link to="/events" className="flex-1 order-2 sm:order-1">
                     <Button type="button" variant="outline" className="w-full">
                       キャンセル
                     </Button>
                   </Link>
-                  <Button type="submit" className="flex-1" disabled={isSubmitting || !formData.name || !formData.date}>
+                  <Button
+                    type="submit"
+                    className="flex-1 order-1 sm:order-2"
+                    disabled={isSubmitting || !formData.title || !formData.start_time || !formData.end_time}
+                  >
                     {isSubmitting ? "作成中..." : "イベントを作成"}
                   </Button>
                 </div>
@@ -117,7 +172,7 @@ export default function NewEventPage() {
             </CardContent>
           </Card>
 
-          {/* Next Steps */}
+          {/* Next Steps (Kept as is) */}
           <Card className="mt-6 bg-blue-50 border-blue-200">
             <CardHeader>
               <CardTitle className="text-blue-900">次のステップ</CardTitle>
